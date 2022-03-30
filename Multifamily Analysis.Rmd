@@ -1,0 +1,105 @@
+---
+title: "Multifamily Analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+boston_original_df <- read_csv("Data/zillow-boston.csv")
+view(boston_original_df)
+boston_MA_df <- boston_original_df %>% filter(rstate == "MA")
+boston_MA_df <- boston_MA_df %>% arrange(desc(price))
+view(boston_MA_df)
+```
+
+##Creation of new variables
+
+###Cap rate data for boston
+https://blogs.umass.edu/kmfay/2022/02/21/quincy-ma-average-property-noi/
+according to this blog from Umass Boston the average NOI for Boston homes is $6,915
+
+```{r}
+boston_add_df <- boston_MA_df %>% mutate(cap_rate = 6915/price) %>%
+  filter(!is.na(bedroom_number)) %>% mutate(price_per_bedroom = price/bedroom_number)
+boston_add_df
+```
+
+
+```{r}
+ggplot(data = boston_add_df, aes(x = bedroom_number, y = price)) +
+  geom_col() +
+  facet_wrap( ~ property_type)
+```
+
+```{r}
+boston_multifamily <- boston_add_df %>% filter(property_type == "MULTI_FAMILY") %>%
+  mutate(avg_price = sum(price) / 38) %>%
+  mutate(projected_rental_income = living_space * 4.50) %>%
+  mutate(down_payment = price * .20) %>%
+  mutate(principal = price - down_payment) %>%
+  mutate(projected_mortgage_payment = ((principal/330) * 1.042)) %>%
+  mutate(projected_mortgage_yr = projected_mortgage_payment * 12) %>%
+  mutate(projected_rental_income_yr = (projected_rental_income * 12)) %>%
+  mutate(ROI = (projected_rental_income_yr - projected_mortgage_yr) / projected_mortgage_yr)
+
+
+
+boston_multifamily
+```
+###Links
+  mutate(ROI = ((projected_rental_income_yr - projected_mortage_yr) / projected_mortgage_yr))
+###average rent per square foot 
+https://www.statista.com/statistics/879118/rent-per-square-foot-in-apartments-by-state-usa/
+
+https://www.rentcafe.com/average-rent-market-trends/us/ma/boston/
+
+```{r}
+library(plotly)
+plot1 <- ggplot(data = boston_multifamily, aes(x = living_space, y = price, 
+                                               label = address)) +
+  geom_point() +
+  geom_smooth()
+
+ggplotly(plot1, tooltip = 'label')
+```
+
+```{r}
+plot2 <- ggplot(data = boston_multifamily, aes(x = price, y = projected_rental_income, 
+                                               label = address)) +
+  geom_point() 
+ggplotly(plot2, tooltip = 'label')
+```
+
+```{r}
+plot3 <- ggplot(data = boston_multifamily, aes(x = projected_mortgage_yr, y = ROI, 
+                                               label = address)) +
+  geom_point() 
+ggplotly(plot3, tooltip = 'label')
+```
+
+```{r pressure, echo=FALSE, results='asis'}
+library(pander)
+boston_multifamily_table <- boston_multifamily %>%
+  select(address, price, down_payment, principal, projected_mortgage_yr, projected_rental_income_yr, ROI)
+
+pander(boston_multifamily_table)
+```
+
+```{r}
+boston_multifamily_table2 <- boston_multifamily_table %>% 
+  select(price, down_payment, projected_mortgage_yr, projected_rental_income_yr, ROI) %>%
+  summarise(meanprice = mean(price),
+            mean_down_payment = mean(down_payment),
+            mean_mortgage = mean(projected_mortgage_yr),
+            mean_rent_income = mean(projected_rental_income_yr),
+            mean_ROI = mean(ROI))
+
+pander(boston_multifamily_table2)
+```
+
+
