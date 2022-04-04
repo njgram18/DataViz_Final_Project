@@ -14,3 +14,6 @@ I did some more research on the statistics and formulas that many real estate in
 
 ##March 30 End of Class
 I continued to work on the Multi-Family Analysis section of my project. I fixed a few of the errors I made from my work outside of class in creating the statistics, although I may need to take another look at that. I created a couple more interactive plots that allows a user to look analyze the table and identify an address of a property. Finally, I created a couple of tables as well that allows users to look at a plot and a table. I am beginning to create a table that will allow me to show the variablity of all these stats for Boston properties. 
+
+##April 4 Beginning of Class
+I moved on to an analysis of Condo properties for sale in Boston. I completed that analysis and then went on to researching how to change some of the aspects of the interactive map that I made at the start of this project. I have to apply some of the things I found and do a more general analysis of Boston real estate and show some of the variablity in the data. 
