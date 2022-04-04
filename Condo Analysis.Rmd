@@ -1,0 +1,61 @@
+---
+title: "Condo Analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+library(tidyverse)
+boston_original_df <- read_csv("Data/zillow-boston.csv")
+##view(boston_original_df)
+boston_MA_df <- boston_original_df %>% filter(rstate == "MA")
+boston_MA_df <- boston_MA_df %>% arrange(desc(price))
+##view(boston_MA_df)
+```
+
+
+
+```{r}
+boston_condo <- boston_add_df %>% filter(property_type == "CONDO") %>%
+  mutate(avg_price = sum(price) / 38) %>%
+  mutate(projected_rental_income = living_space * 4.50) %>%
+  mutate(down_payment = price * .20) %>%
+  mutate(principal = price - down_payment) %>%
+  mutate(projected_mortgage_payment = ((principal/330) * 1.042)) %>%
+  mutate(projected_mortgage_yr = projected_mortgage_payment * 12) %>%
+  mutate(projected_rental_income_yr = (projected_rental_income * 12)) %>%
+  mutate(ROI = (projected_rental_income_yr - projected_mortgage_yr) / projected_mortgage_yr)
+
+boston_condo
+```
+```{r}
+library(plotly)
+plot1 <- ggplot(data = boston_condo, aes(x = living_space, y = price, 
+                                               label = address)) +
+  geom_point() +
+  geom_smooth()
+
+ggplotly(plot1, tooltip = 'label')
+```
+```{r}
+plot2 <- ggplot(data = boston_condo, aes(x = price, y = projected_rental_income, 
+                                               label = address)) +
+  geom_point() +
+  geom_smooth()
+ggplotly(plot2, tooltip = 'label')
+```
+```{r}
+library(pander)
+boston_condo_table <- boston_condo %>% 
+  select(price, down_payment, projected_mortgage_yr, projected_rental_income_yr, ROI) %>%
+  summarise(meanprice = mean(price),
+            mean_down_payment = mean(down_payment),
+            mean_mortgage = mean(projected_mortgage_yr),
+            mean_rent_income = mean(projected_rental_income_yr),
+            mean_ROI = mean(ROI))
+
+pander(boston_condo_table)
+```
+

@@ -51,8 +51,6 @@ content <- boston %>%
 
 properties$label <- paste("Address", properties$address, ",",
                                "Price", properties$price, ",",
-                               "Bedrooms", properties$bedroom_number, ",",
-                               "Bathrooms", properties$bathroom_number, ",",
                                "Living Space", properties$living_space, ",",
                                "Property Type", properties$property_type, ",")
 

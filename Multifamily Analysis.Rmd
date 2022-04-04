@@ -11,10 +11,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(tidyverse)
 boston_original_df <- read_csv("Data/zillow-boston.csv")
-view(boston_original_df)
+##view(boston_original_df)
 boston_MA_df <- boston_original_df %>% filter(rstate == "MA")
 boston_MA_df <- boston_MA_df %>% arrange(desc(price))
-view(boston_MA_df)
+##view(boston_MA_df)
 ```
 
 ##Creation of new variables
