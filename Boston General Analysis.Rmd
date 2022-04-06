@@ -33,32 +33,73 @@ boston_general
 boston_general_price <- boston_general %>%
   filter(property_type == "CONDO" |
            property_type == "SINGLE_FAMILY" |
-           property_type == "MULTI_FAMILY" |
-           property_type == "TOWNHOUSE") %>%
+           property_type == "MULTI_FAMILY") %>%
   group_by(property_type) %>%
-  summarise(mean_price = mean(price)) %>%
+  summarise(mean_price = mean(price),
+            sd_price = sd(price),
+            n_properties = n()) %>%
+    mutate(l_se = mean_price - sd_price / sqrt(n_properties),
+         u_se = mean_price + sd_price / sqrt(n_properties)) %>%
   mutate(type = fct_reorder(property_type, mean_price))
 boston_general_price
 ggplot(data = boston_general_price, aes(x = property_type, y = mean_price)) + 
   geom_col() +
   coord_flip()
-
-boston_general_price
 ```
-
 ```{r}
-boston_general_price_2 <- boston_general %>%
-  filter(property_type == "CONDO" |
-           property_type == "SINGLE_FAMILY" |
-           property_type == "MULTI_FAMILY" |
-           property_type == "TOWNHOUSE") %>%
-  group_by(property_type) %>%
-  summarise(med_price = median(price)) %>%
-  mutate(type = fct_reorder(property_type, med_price))
 ggplot(data = boston_general_price, aes(x = property_type, y = mean_price)) +
-  geom_boxplot() +
+  geom_point() +
+  geom_errorbar(aes(ymin = l_se, ymax = u_se)) +
   coord_flip()
 ```
 
 
+```{r}
+boston_general_rent <- boston_general %>%
+  filter(property_type == "CONDO" |
+           property_type == "SINGLE_FAMILY" |
+           property_type == "MULTI_FAMILY") %>%
+  group_by(property_type) %>%
+  summarise(mean_rent = mean(projected_rental_income_yr),
+            sd_rent = sd(projected_rental_income_yr),
+            n_properties = n()) %>%
+    mutate(l_se = mean_rent - sd_rent / sqrt(n_properties),
+         u_se = mean_rent + sd_rent / sqrt(n_properties)) %>%
+  mutate(type = fct_reorder(.f = property_type, .x = mean_rent))
+
+ggplot(data = boston_general_rent, aes(x = property_type, y = mean_rent)) + 
+  geom_col() +
+  coord_flip()
+```
+
+```{r}
+ggplot(data = boston_general_rent, aes(x = property_type, y = mean_rent)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = l_se, ymax = u_se)) +
+  coord_flip()
+```
+
+```{r}
+boston_general_roi <- boston_general %>%
+  filter(property_type == "CONDO" |
+           property_type == "SINGLE_FAMILY" |
+           property_type == "MULTI_FAMILY") %>%
+  group_by(property_type) %>%
+  summarise(mean_ROI = mean(ROI),
+            sd_ROI = sd(ROI),
+            n_properties = n()) %>%
+    mutate(l_se = mean_ROI - sd_ROI / sqrt(n_properties),
+         u_se = mean_ROI + sd_ROI / sqrt(n_properties)) %>%
+  mutate(type = fct_reorder(property_type, mean_ROI))
+
+ggplot(data = boston_general_roi, aes(x = property_type, y = mean_ROI)) + 
+  geom_col() +
+  coord_flip()
+```
+```{r}
+ggplot(data = boston_general_roi, aes(x = property_type, y = mean_ROI)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = l_se, ymax = u_se)) +
+  coord_flip()
+```
 

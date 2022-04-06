@@ -1,0 +1,18 @@
+---
+title: "New York City Data Set"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+nyc <- read_csv("Data/nyc-rolling-sales.csv")
+view(nyc)
+
+nyc_properties <- mutate(property_type =
+                           case_when(""))
+```
+

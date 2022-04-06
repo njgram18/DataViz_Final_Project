@@ -12,3 +12,6 @@ He is working on a shiny app to analyze a bunch of MLS soccer data. Right now he
 
 ##April 4th Hamblen
 He is working on a shiny app about golfer statistics. The user can pick a torunament and get results on the last 7 winners and their final scores. He said that one issue he is having is for players who have multiple wins at the same tournament within this span. HE was working on creating a new variable for that. Additionally, he mentioned that the data was from a fantasy golf app, so there was a lot of unwanted junk that he has been slowly getting rid of. 
+
+##April 6th Tom
+Tom is working on an R package for covid around the world. It is a super cool project that allows people to do their own research about covid through his program. It was great to talk to him because I noticed that in his interactive map his labels were vertical. That has been something that I have been trying to do with my map but have not been able to find. Pretty impressive project from Tom though. 

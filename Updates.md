@@ -17,3 +17,12 @@ I continued to work on the Multi-Family Analysis section of my project. I fixed 
 
 ##April 4 Beginning of Class
 I moved on to an analysis of Condo properties for sale in Boston. I completed that analysis and then went on to researching how to change some of the aspects of the interactive map that I made at the start of this project. I have to apply some of the things I found and do a more general analysis of Boston real estate and show some of the variablity in the data. 
+
+##April 4 End of Class
+I worked on the condo analysis and the single family analysis for my project. Additionally, I started to work on the general analysis of Boston. I will show the varied prices for property types and will use this analysis to compare the overall Boston real estate market with other major cities across the country. 
+
+##April 6 Beginning of Class
+I continued to work on general Boston housing data set. I created plots that showed the variability of home prices in the city based on the property type. I did run into some issues that took some time to fix, but I managed to figure them all out. I then began searching for new data sets for New York. To be honest I thought these would be easier to find but it is turning out to be a little more difficult to find data sets with good variables. 
+
+##April 6 End of Class
+I finished up the Boston general analysis. I found a nyc data set on Kaggle for the NYC portion of my project. I looked through the data and tried to figure out the best way to simplify the data set so that I could use it for more analysis. I ended up deciding to rename the variable I need and put all the different building classifications that NYC has into more broad categories. 
