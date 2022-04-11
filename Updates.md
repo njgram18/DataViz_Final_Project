@@ -26,3 +26,6 @@ I continued to work on general Boston housing data set. I created plots that sho
 
 ##April 6 End of Class
 I finished up the Boston general analysis. I found a nyc data set on Kaggle for the NYC portion of my project. I looked through the data and tried to figure out the best way to simplify the data set so that I could use it for more analysis. I ended up deciding to rename the variable I need and put all the different building classifications that NYC has into more broad categories. 
+
+##April 11 Before Class
+I have been working on getting the NYC data set into a form where I can actually work with it. I went through the entire data set and figured out the each type of "Building Class Type" and tried to simplify it do allow me to do a property type analysis for each property. I struggled to get the code to work because the columns are not made correctly for because there are spaces in the titles. I looked for some different data sets in NYC but have not been able to find one with the right variables. I am going to keep looking or see if I can make this one work. 
