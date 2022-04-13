@@ -29,3 +29,6 @@ I finished up the Boston general analysis. I found a nyc data set on Kaggle for 
 
 ##April 11 Before Class
 I have been working on getting the NYC data set into a form where I can actually work with it. I went through the entire data set and figured out the each type of "Building Class Type" and tried to simplify it do allow me to do a property type analysis for each property. I struggled to get the code to work because the columns are not made correctly for because there are spaces in the titles. I looked for some different data sets in NYC but have not been able to find one with the right variables. I am going to keep looking or see if I can make this one work. 
+
+##April 13 Before Class 
+I ended up finding a better data set on NYC. It is set up much better for the analysis that I am trying to perform in this project. I continued to research for more data on rental prices in NYC for the rental aspect of this project. It was pretty difficult to find a general average for the city because it is so big. Most of the research out there breaks up these prices by neighborhoods. I was able to find one on all the average prices for each neighborhood and get the average rent per square foot. 
