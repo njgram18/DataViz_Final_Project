@@ -15,3 +15,6 @@ He is working on a shiny app about golfer statistics. The user can pick a toruna
 
 ##April 6th Tom
 Tom is working on an R package for covid around the world. It is a super cool project that allows people to do their own research about covid through his program. It was great to talk to him because I noticed that in his interactive map his labels were vertical. That has been something that I have been trying to do with my map but have not been able to find. Pretty impressive project from Tom though. 
+
+##April 18th Zetterquist
+Emile is making a shiny app for a bunch of NHL hockey data. Overall the app looks really good but he just needs to clean things up. One of the things that he wants to do is limit some of the variables that are in one of his plots. Right now there are 156 variables and he thinks that a lot of them are not really applicable for his project. Additionally, he wants to make his interactive line graph show up in the teams color when the user hovers over it. 

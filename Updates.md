@@ -32,3 +32,9 @@ I have been working on getting the NYC data set into a form where I can actually
 
 ##April 13 Before Class 
 I ended up finding a better data set on NYC. It is set up much better for the analysis that I am trying to perform in this project. I continued to research for more data on rental prices in NYC for the rental aspect of this project. It was pretty difficult to find a general average for the city because it is so big. Most of the research out there breaks up these prices by neighborhoods. I was able to find one on all the average prices for each neighborhood and get the average rent per square foot. 
+
+##April 18 Before Class
+I began working on the analysis in the New York Data set. I decided that I would not be able to separate the data set into property types because there are just way to many different kinds of properties in the NYC building code. Therefore, I have decided to split them up by boroughs. Through my research there seems to be quite a bit of variation when it comes to housing in these different boroughs so I think that it should work well. I started with the Bronx but plan on going through each of the 5 of them. 
+
+##April 18 End of Class
+I got into the analysis of NYC properties. I was able to complete the Bronx, Manhattan, and Brooklyn analysis. Also, I added a new variable to both the Boston analysis and the NYC analysis. Its called down_return and takes the down payment and the projected rental income for the year to allow investors to understand how much of their own money (assuming they are going to get a mortgage) they will receive back due to the rental income the property brings in. 
