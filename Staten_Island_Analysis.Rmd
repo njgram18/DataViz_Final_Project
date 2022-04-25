@@ -1,0 +1,64 @@
+---
+title: "Staten Island Analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+nyc_properties <- read_csv("Data/NYC_property_sales.csv")
+staten_island_properties <- nyc_properties %>% filter(borough == "Staten Island")
+staten_island_properties
+```
+
+```{r}
+staten_island_analysis <- staten_island_properties %>%
+  mutate(avg_price = sum(sale_price) / 4837) %>%
+  mutate(projected_rental_income = gross_square_feet * 0.87) %>%
+  mutate(down_payment = sale_price * .20) %>%
+  mutate(principal = sale_price - down_payment) %>%
+  mutate(projected_mortgage_payment = ((principal/330) * 1.042)) %>%
+  mutate(projected_mortgage_yr = projected_mortgage_payment * 12) %>%
+  mutate(projected_rental_income_yr = (projected_rental_income * 12)) %>%
+  mutate(ROI = (projected_rental_income_yr - projected_mortgage_yr) / projected_mortgage_yr) %>%
+  mutate(down_return = projected_rental_income_yr / down_payment * 100)
+staten_island_analysis
+```
+```{r}
+library(plotly)
+plot1 <- ggplot(data = staten_island_analysis, aes(x = gross_square_feet, y = sale_price, 
+                                               label = address)) +
+  geom_point() +
+  geom_smooth()
+
+ggplotly(plot1, tooltip = 'label')
+```
+```{r}
+library(plotly)
+plot2 <- ggplot(data = staten_island_analysis, aes(x = down_return, y = sale_price, 
+                                               label = address)) +
+  geom_point() +
+  geom_smooth()
+
+ggplotly(plot2, tooltip = 'label')
+```
+
+```{r}
+plot3 <- ggplot(data = staten_island_analysis, aes(x = sale_price, y = projected_rental_income_yr, 
+                                               label = address)) +
+  geom_point() +
+  geom_smooth()
+ggplotly(plot3, tooltip = 'label')
+```
+
+```{r}
+plot4 <- ggplot(data = manhattan_analysis, aes(x = projected_mortgage_yr, y = ROI, 
+                                               label = address)) +
+  geom_point() +
+  geom_smooth()
+ggplotly(plot4, tooltip = 'label') 
+```
+

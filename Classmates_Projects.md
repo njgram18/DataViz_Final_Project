@@ -18,3 +18,6 @@ Tom is working on an R package for covid around the world. It is a super cool pr
 
 ##April 18th Zetterquist
 Emile is making a shiny app for a bunch of NHL hockey data. Overall the app looks really good but he just needs to clean things up. One of the things that he wants to do is limit some of the variables that are in one of his plots. Right now there are 156 variables and he thinks that a lot of them are not really applicable for his project. Additionally, he wants to make his interactive line graph show up in the teams color when the user hovers over it. 
+
+##April 25th Claire
+Claire is working on a shiny app project about trade deadline odds for NHL hockey teams after the trade deadline for the past 5 seasons. The graph of the project allows the user to have an interactive map of the games prior to the deadline that allows you to see the opponent and the odds for the money line of the game. Additionally, she has a table that shows the top performers for odds after the trade deadline. 

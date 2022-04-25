@@ -1,0 +1,96 @@
+---
+title: "New York General Analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+NY_original_df <- read_csv("Data/NYC_property_sales.csv")
+##view(boston_original_df)
+NYC_df <- NY_original_df %>% arrange(desc(sale_price))
+##view(boston_MA_df)
+NYC_df
+```
+
+```{r}
+nyc_general <- NYC_df %>%
+  mutate(avg_price = sum(sale_price) / 38177) %>%
+  mutate(projected_rental_income = gross_square_feet * 2.01) %>%
+  mutate(down_payment = sale_price * .20) %>%
+  mutate(principal = sale_price - down_payment) %>%
+  mutate(projected_mortgage_payment = ((principal/330) * 1.042)) %>%
+  mutate(projected_mortgage_yr = projected_mortgage_payment * 12) %>%
+  mutate(projected_rental_income_yr = (projected_rental_income * 12)) %>%
+  mutate(ROI = (projected_rental_income_yr - projected_mortgage_yr) / projected_mortgage_yr)
+
+nyc_general
+```
+```{r}
+nyc_general_price <- nyc_general %>%
+  group_by(borough) %>%
+  summarise(mean_price = mean(sale_price),
+            sd_price = sd(sale_price),
+            n_properties = n()) %>%
+    mutate(l_se = mean_price - sd_price / sqrt(n_properties),
+         u_se = mean_price + sd_price / sqrt(n_properties)) %>%
+  mutate(borough_2 = fct_reorder(borough, mean_price))
+boston_general_price
+ggplot(data = nyc_general_price, aes(x = borough_2, y = mean_price)) + 
+  geom_col() +
+  coord_flip()
+```
+
+```{r}
+ggplot(data = nyc_general_price, aes(x = borough_2, y = mean_price)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = l_se, ymax = u_se)) +
+  coord_flip()
+```
+
+```{r}
+nyc_general_rent <- nyc_general %>%
+  group_by(borough) %>%
+  summarise(mean_rent = mean(projected_rental_income_yr),
+            sd_rent = sd(projected_rental_income_yr),
+            n_properties = n()) %>%
+    mutate(l_se = mean_rent - sd_rent / sqrt(n_properties),
+         u_se = mean_rent + sd_rent / sqrt(n_properties)) %>%
+  mutate(borough_2 = fct_reorder(.f = borough, .x = mean_rent))
+
+ggplot(data = nyc_general_rent, aes(x = borough_2, y = mean_rent)) + 
+  geom_col() +
+  coord_flip()
+```
+
+```{r}
+ggplot(data = nyc_general_rent, aes(x = borough_2, y = mean_rent)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = l_se, ymax = u_se)) +
+  coord_flip()
+```
+
+```{r}
+nyc_general_roi <- nyc_general %>%
+  group_by(borough) %>%
+  summarise(mean_ROI = mean(ROI),
+            sd_ROI = sd(ROI),
+            n_properties = n()) %>%
+    mutate(l_se = mean_ROI - sd_ROI / sqrt(n_properties),
+         u_se = mean_ROI + sd_ROI / sqrt(n_properties)) %>%
+  mutate(borough_2 = fct_reorder(borough, mean_ROI))
+
+ggplot(data = nyc_general_roi, aes(x = borough_2, y = mean_ROI)) + 
+  geom_col() +
+  coord_flip()
+```
+
+```{r}
+ggplot(data = nyc_general_roi, aes(x = borough_2, y = mean_ROI)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = l_se, ymax = u_se)) +
+  coord_flip()
+```

@@ -38,3 +38,9 @@ I began working on the analysis in the New York Data set. I decided that I would
 
 ##April 18 End of Class
 I got into the analysis of NYC properties. I was able to complete the Bronx, Manhattan, and Brooklyn analysis. Also, I added a new variable to both the Boston analysis and the NYC analysis. Its called down_return and takes the down payment and the projected rental income for the year to allow investors to understand how much of their own money (assuming they are going to get a mortgage) they will receive back due to the rental income the property brings in. 
+
+##April 25 Before Class
+I completed the analysis of the Queens and Staten Island boroughs and started the general analysis for New York City. Additionally, I started to look into some other data sets for more analysis and started to do some research on blogdown to get an idea of how to finalize the project. 
+
+##April 25 End of Class
+I started to try and get blogdown up and running to finalize my project. Unfortunately, there are still some bumps in the road with that part, but I am not too worried about it. I completed the NYC general analysis and it is now time to finalize the project. I plan to edit a few things and bring some other aspects of the class into my graphs and other features. 
